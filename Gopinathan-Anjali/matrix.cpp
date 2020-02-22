@@ -22,7 +22,7 @@ Matrix getMatrixFromUser(){
         mtrx[i] = new int[n];
     }
 
-    for(int r=1; r<=m; r++){
+    for(unsigned int r=1; r<=m; r++){
         std::cout << "Enter all " << n << " elements in row" << r << ":\t";
         for(int c = 1; c <= n; c++){
             std::cin >> mtrx[r-1][c-1];
@@ -35,8 +35,7 @@ int main(){
     
     char t_m_response;
     std::cout << "This program will transpose and multiply matrices." << std::endl
-        << "Do you want to transpose (t) one matrix or multiply (m) two 
-        matrices?" << std::endl;
+        << "Do you want to transpose (t) one matrix or multiply (m) two matrices?" << std::endl;
     std::cin >> t_m_response;
     if(t_m_response == 't'){    //transpose
         std::cout << "You selected transpose." << std::endl;
