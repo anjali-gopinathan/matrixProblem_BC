@@ -1,29 +1,20 @@
 /** OperateMatrix class storing a matrix to operate on (transpose a 
  *  matrix or multiply two matrices) 
- * 
  */
+#include <vector>
 
-
-class Matrix {
+class Matrix{
     public:
-        Matrix(int** mtrx, int rows, int cols);     //constructor
-
-        Matrix (const Matrix& myMatrix);    //copy constructor
-        Matrix& operator=(const Matrix& myMatrix);  //copy assignment operator
-        ~Matrix();  //destructor
+        Matrix();
+        Matrix(int rows, int cols);
+        vector<vector<double>> matrix_;
     private:
-        int** matrix_;   //2d array representing matrix
-        std::size_t m_;  //rows
-        std::size_t n_;  //columns
-
+        int m_; //rows
+        int n_; //cols
 }
+
 struct OperateMatrix {
-    public:
-        // OperateMatrix();
-        // ~OperateMatrix();
-
-        Matrix multiply(Matrix m1, Matrix m2);
-
-        Matrix transpose(Matrix m);
-
+    //OperateMatrix();
+    Matrix multiply(Matrix m1, Matrix m2);
+    Matrix transpose(Matrix m);
 }
