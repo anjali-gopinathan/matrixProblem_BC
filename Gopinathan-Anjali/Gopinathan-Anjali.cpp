@@ -12,24 +12,64 @@ Matrix::Matrix()
     : m_(0), n_(0)    
 { }
 
-Matrix(int rows, int cols)
+Matrix::Matrix(unsigned int rows, unsigned int cols)
     : m_(rows), n_(cols)
-{ }
+{ 
+    matrix_.resize(m_);   //outer vector consists of each row, so it has size rows (m_)
+    for(unsigned int i=0; i<m_; i++){
+        matrix_[i].resize(n_);
+        for(unsigned int j=0; j<n_; j++){
+            matrix_[i][j] = 0;
+        }
+    }
+}
+
+Matrix::Matrix(std::vector<std::vector<double>> matrix, unsigned int rows, unsigned int cols)
+    : matrix_(matrix), m_(rows), n_(cols) { }
+
+//setters for private variables of Matrix
+void Matrix::setMatrix(std::vector<std::vector<double>> matrix){
+    matrix_ = matrix;
+}
+void Matrix::setRows(unsigned int rows){
+    m_ = rows;
+}
+
+void Matrix::setCols(unsigned int cols){
+    n_ = cols;
+}
+
+//getters for private variables of Matrix
+std::vector<std::vector<double>> Matrix::getMatrix(){
+    return matrix_;
+}
+unsigned int Matrix::getRows(){
+    return m_;
+}
+unsigned int Matrix::getCols(){
+    return n_;
+}
 
 Matrix OperateMatrix::multiply(Matrix m1, Matrix m2){
-    if(m1.n_ != m2.m_){
+    if(m1.getCols() != m2.getRows()){
         throw std::invalid_argument(MULTIPLY_BAD_DIMS);
     }
+    Matrix product (m1.getRows(), m2.getCols());
 
+    
+    return product;
 }
 
 Matrix OperateMatrix::transpose(Matrix m){
-    Matrix transposed;
+    Matrix result(m.getCols(), m.getRows());
+    std::vector<std::vector<double>> transposed = result.getMatrix();
 
-    for(int r = 0; r < m.m_; r++){
-        for(int c = 0; c < m.n_; c++){
-            
+    for(unsigned int r = 0; r < m.getRows(); r++){
+        for(unsigned int c = 0; c < m.getCols(); c++){
+            transposed[c][r] = m.getMatrix()[r][c];
         }
     }
+    result.setMatrix(transposed);
+    return result;
 
 }
