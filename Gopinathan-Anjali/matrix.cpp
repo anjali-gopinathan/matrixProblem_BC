@@ -1,11 +1,12 @@
 /** Test file. Contains main
  * 
- * 
  */
 
 #include "Gopinathan-Anjali.h"
 #include <iostream>
 #include <stdexcept>
+#include <string>
+#include <sstream>
 
 
 Matrix getMatrixFromUser(){
@@ -19,14 +20,18 @@ Matrix getMatrixFromUser(){
 
     double val;
     std::cout << "Enter all " << m << " rows, each containing " << n 
-                << " elements, separated by a space." << std::endl; 
+                << " elements, separated by a space.\n" << std::endl; 
     for(unsigned int r=0; r<m; r++){
         std::cout << "Enter all " << n << " elements in row " << (r+1) << ", separated by a space:\t";        
+        std::string thisRowInput;
+        std::getline(std::cin, thisRowInput);
+        std::stringstream thisRow (thisRowInput);
         for(unsigned int c = 0; c < n; c++){
             std::cin >> val;
             row.push_back(val);
         }
         userInput.push_back(row);
+        row.clear();
     }
     Matrix input(userInput, m, n);
     return input;
