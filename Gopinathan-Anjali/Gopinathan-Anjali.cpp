@@ -52,10 +52,21 @@ unsigned int Matrix::getCols(){
 
 Matrix OperateMatrix::multiply(Matrix m1, Matrix m2){
     if(m1.getCols() != m2.getRows()){
-        throw std::invalid_argument(MULTIPLY_BAD_DIMS);
+        throw MULTIPLY_BAD_DIMS;
     }
     Matrix product (m1.getRows(), m2.getCols());
-
+    std::vector<std::vector<double>> multiplied = product.getMatrix();
+    unsigned int dim = m1.getCols();
+    for(unsigned int r=0; r<product.getRows(); r++){
+        for(unsigned int c=0; c<product.getCols(); c++){
+            double element = 0;
+            for(unsigned int k=0; k<dim; k++){
+                element += (m1.getMatrix()[r][k] * m2.getMatrix()[k][c]);
+            }
+            multiplied[r][c] = element;
+        }
+    }
+    product.setMatrix(multiplied);
     
     return product;
 }
