@@ -26,17 +26,9 @@ Matrix::Matrix(unsigned int rows, unsigned int cols)
 
 Matrix::Matrix(std::vector<std::vector<double>> matrix, unsigned int rows, unsigned int cols)
     : matrix_(matrix), m_(rows), n_(cols) { }
-
 //setters for private variables of Matrix
 void Matrix::setMatrix(std::vector<std::vector<double>> matrix){
     matrix_ = matrix;
-}
-void Matrix::setRows(unsigned int rows){
-    m_ = rows;
-}
-
-void Matrix::setCols(unsigned int cols){
-    n_ = cols;
 }
 
 //getters for private variables of Matrix
@@ -50,7 +42,8 @@ unsigned int Matrix::getCols(){
     return n_;
 }
 
-Matrix OperateMatrix::multiply(Matrix m1, Matrix m2){
+Matrix OperateMatrix::multiply(Matrix m1, Matrix m2)
+{
     if(m1.getCols() != m2.getRows()){
         throw MULTIPLY_BAD_DIMS;
     }
@@ -71,7 +64,8 @@ Matrix OperateMatrix::multiply(Matrix m1, Matrix m2){
     return product;
 }
 
-Matrix OperateMatrix::transpose(Matrix m){
+Matrix OperateMatrix::transpose(Matrix m)
+{
     Matrix result(m.getCols(), m.getRows());
     std::vector<std::vector<double>> transposed = result.getMatrix();
 
