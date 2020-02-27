@@ -2,7 +2,8 @@
  *  matrix or multiply two matrices) 
  */
 #include <vector>
-#include <stdexcept>
+
+typedef std::vector<std::vector<double>> vect_2d;
 
 struct Matrix{
     public:
@@ -19,29 +20,24 @@ struct Matrix{
                     }
                 }
             }
-        Matrix(std::vector<std::vector<double>> matrix, unsigned int rows, unsigned int cols)
+        Matrix(vect_2d matrix, unsigned int rows, unsigned int cols)
             : matrix_(matrix), m_(rows), n_(cols) { }
-        void setMatrix(std::vector<std::vector<double>> matrix)
+        void setMatrix(vect_2d matrix) 
+            { matrix_ = matrix; }
+        void setMatrixElement(unsigned int row, unsigned int col, double val)
             {
-                matrix_ = matrix;
+                matrix_[row][col] = val;
             }
-
-        std::vector<std::vector<double>> getMatrix()
-            {
-                return matrix_;
-            }
-        unsigned int getRows()
-            {
-                return m_;
-            }
-        unsigned int getCols()
-            {
-                return n_;
-            }
-
-    private:    
+        vect_2d getMatrix() 
+            { return matrix_; }
         
-        std::vector<std::vector<double>> matrix_;
+        unsigned int getRows()
+            { return m_; }
+        unsigned int getCols()
+            { return n_; }
+
+    private:            
+        vect_2d matrix_;
         unsigned int m_; //rows
         unsigned int n_; //cols
 };
@@ -49,11 +45,7 @@ struct Matrix{
 struct OperateMatrix {
     Matrix multiply(Matrix m1, Matrix m2)
     {
-        if(m1.getCols() != m2.getRows()){
-            throw ("The n value of matrix 1 does not match the m value of matrix 2. Cannot multiply these matrices.");
-        }
         Matrix product (m1.getRows(), m2.getCols());
-        std::vector<std::vector<double>> multiplied = product.getMatrix();
         unsigned int dim = m1.getCols();
         for(unsigned int r=0; r<product.getRows(); r++){
             for(unsigned int c=0; c<product.getCols(); c++){
@@ -61,25 +53,23 @@ struct OperateMatrix {
                 for(unsigned int k=0; k<dim; k++){
                     element += (m1.getMatrix()[r][k] * m2.getMatrix()[k][c]);
                 }
-                multiplied[r][c] = element;
+                product.setMatrixElement(r, c, element);
             }
         }
-        product.setMatrix(multiplied);
-        
         return product;
     }
 
     Matrix transpose(Matrix m)
     {
         Matrix result(m.getCols(), m.getRows());
-        std::vector<std::vector<double>> transposed = result.getMatrix();
 
         for(unsigned int r = 0; r < m.getRows(); r++){
             for(unsigned int c = 0; c < m.getCols(); c++){
-                transposed[c][r] = m.getMatrix()[r][c];
+                // transposed[c][r] = m.getMatrix()[r][c];
+                result.setMatrixElement(c, r, m.getMatrix()[r][c]);
             }
         }
-        result.setMatrix(transposed);
+        // result.setMatrix(transposed);    
         return result;
     }
 };
