@@ -1,19 +1,12 @@
 CXXFLAGS = --std=c++11 -g -Wall
 
-all: matrix
+all: matrix-test
 
-matrix: matrix.o Gopinathan-Anjali.h
-	g++ $(CXXFLAGS) matrix.o Gopinathan-Anjali -o matrix
+matrix-test: matrix-test.o Gopinathan-Anjali.h
+	g++ $(CXXFLAGS) matrix-test.cpp -o matrix-test
 
-#Gopinathan-Anjali.o: Gopinathan-Anjali.h Gopinathan-Anjali.cpp
-#	g++ $(CXXFLAGS) -c Gopinathan-Anjali.cpp -o Gopinathan-Anjali.o
-
-#Gopinathan-Anjali: Gopinathan-Anjali.h 
-#	g++ $(CXXFLAGS) -c -o Gopinathan-Anjali.o
-
-
-matrix.o: matrix.cpp
-	g++ $(CXXFLAGS) -c matrix.cpp -o matrix.o
+matrix-test.o: matrix-test.cpp
+	g++ $(CXXFLAGS) -c matrix-test.cpp -o matrix-test.o
 
 clean:
-	rm -f *.o matrix
+	rm -f *.o matrix-test

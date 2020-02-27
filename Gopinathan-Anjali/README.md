@@ -1,5 +1,5 @@
-# Matrix
+# Anjali Gopinathan - Matrix Multiplication and Transposition
 This program multiplies and transposes matrices.
 ## Execution
-To compile: ```g++ -g -Wall matrix.cpp -o matrix```
-To run: ```./matrix```
+To compile: ```make``` 
+To run: ```./matrix-test```
