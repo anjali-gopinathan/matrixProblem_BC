@@ -19,5 +19,5 @@ tests: matrixTest
 	-@echo "--- All Tested! ---"
 
 clean:
-	-@rm *.o *.h.gch matrixTest
+	-@rm -f *.o *.h.gch matrixTest
 	-@echo "--- All Clean! ---"

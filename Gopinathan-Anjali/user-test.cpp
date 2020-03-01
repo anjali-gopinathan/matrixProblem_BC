@@ -13,7 +13,6 @@ const std::string BAD_DIMENSION = "Invalid entry. Dimension must be a positive i
 const std::string BAD_MTRX_ELEMENT = "Invalid entry. Element must be a properly formatted number.";
 const std::string BAD_CHAR_SELECTION = "Response must be 't' or 'm'.";
 const std::string ERROR_STARTER = "Error - ";
-const std::string BAD_MULT_DIMS = "The number of columns in matrix 1 must match the number of rows in matrix 2.";
 
 /* The following two functions, getRowsFromUser and getColsFromUser, take 
  * input from the user and error check to make sure the input is valid .

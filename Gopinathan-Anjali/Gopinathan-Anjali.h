@@ -7,6 +7,7 @@
 #include <stdexcept>
 
 typedef std::vector<std::vector<double>> vect_2d;
+const std::string BAD_MULT_DIMS = "The number of columns in matrix 1 must match the number of rows in matrix 2.";
 
 struct Matrix{
     public:
