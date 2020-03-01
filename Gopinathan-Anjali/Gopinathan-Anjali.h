@@ -1,6 +1,6 @@
 /** Anjali Gopinathan - Matrix Multiplication and Transposition  
  * 
- *  OperateMatrix class storing a matrix to operate on (transpose a 
+ *  OperateMatrix class storing functions that operate on matrices (transpose a 
  *  matrix or multiply two matrices) 
  */
 #include <vector>
