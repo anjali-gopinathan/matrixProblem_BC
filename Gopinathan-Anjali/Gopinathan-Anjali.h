@@ -4,6 +4,7 @@
  *  matrix or multiply two matrices) 
  */
 #include <vector>
+#include <stdexcept>
 
 typedef std::vector<std::vector<double>> vect_2d;
 
@@ -56,6 +57,9 @@ struct OperateMatrix {
     Matrix multiply(Matrix m1, Matrix m2)
     {
         Matrix product (m1.getRows(), m2.getCols());
+        if(m1.getCols() != m2.getRows()){
+            throw std::invalid_argument(BAD_MULT_DIMS);
+        }
         unsigned int dim = m1.getCols();
         for(unsigned int r=0; r<product.getRows(); r++){
             for(unsigned int c=0; c<product.getCols(); c++){
@@ -79,5 +83,6 @@ struct OperateMatrix {
             }
         }
         return result;
+
     }
 };

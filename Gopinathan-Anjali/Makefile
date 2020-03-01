@@ -1,30 +1,23 @@
 CC = g++
 CPPFLAGS = --std=c++11 -g -Wall
-BIN_DIR = bin
 GTEST_LL = -I /googletest/googletest/include/gtest/ -l gtest -l gtest_main -pthread
 
 
-all: $(BIN_DIR)/matrixTest
+all: matrixTest
 
-# Rule to ensure that $(BIN_DIR) directory exists or it'll create it
-$(BIN_DIR)/.dirstamp:
-	-@mkdir -p $(BIN_DIR)
-	-@touch $(BIN_DIR)/.dirstamp
-
-$(BIN_DIR)/matrixTest.o: Gopinathan-Anjali.h $(BIN_DIR)/.dirstamp
+matrixTest.o: Gopinathan-Anjali.h
 	$(CC) $(CPPFLAGS) -c Gopinathan-Anjali.h 
 
-$(BIN_DIR)/matrixTest: tester.cpp 
-	$(CC) $(CPPFLAGS) tester.cpp $(GTEST_LL) -o $(BIN_DIR)/matrixTest
+matrixTest: tester.cpp 
+	$(CC) $(CPPFLAGS) tester.cpp $(GTEST_LL) -o matrixTest
 
+userTests: user-test.o Gopinathan-Anjali.h
+	g++ $(CXXFLAGS) user-test.cpp -o userTests
 
-
-.PHONY: clean tests
-
-tests: $(BIN_DIR)/matrixTest
-	-@$(BIN_DIR)/matrixTest
+tests: matrixTest
+	-@./matrixTest
 	-@echo "--- All Tested! ---"
 
 clean:
-	-@rm -rf $(BIN_DIR)
+	-@rm *.o *.h.gch matrixTest
 	-@echo "--- All Clean! ---"
